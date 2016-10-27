@@ -2,11 +2,12 @@
 //  AppDelegate.m
 //  ObjcSegmentUserApp
 //
-//  Created by oono on 2016/10/26.
-//  Copyright © 2016年 Nifty. All rights reserved.
+//  Created by NIFTY on 2016/10/26.
+//  Copyright © 2016年 NIFTY. All rights reserved.
 //
 
 #import "AppDelegate.h"
+#import "NCMB/NCMB.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    //********** APIキーの設定とSDKの初期化 **********
+    [NCMB setApplicationKey:@"YOUR_APPLICATION_KEY"
+                  clientKey:@"YOUR_CLIENT_KEY"];
+    
     return YES;
 }
 
