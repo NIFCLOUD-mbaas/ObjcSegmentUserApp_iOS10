@@ -34,35 +34,35 @@
 - (IBAction)loginBtn:(UIButton *)sender {
     // キーボードを閉じる
     [self closeKeyboad];
-    
-    // 入力確認
-    if (self.userNameTextField.text.length == 0 || self.passwordTextField.text.length == 0) {
-        self.errorLabel.text = @"未入力の項目があります";
-        // TextFieldを空に
-        [self cleanTextField];
-        
-        return;
-        
-    }
-    
-    // ユーザー名とパスワードでログイン
-    [NCMBUser logInWithUsernameInBackground:self.userNameTextField.text password:self.passwordTextField.text block:^(NCMBUser *user, NSError *error) {
-        // TextFieldを空に
-        [self cleanTextField];
-        
-        if (error) {
-            // ログイン失敗時の処理
-            self.errorLabel.text = [NSString stringWithFormat:@"ログインに失敗しました:%ld", error.code];
-            NSLog(@"ログインに失敗しました:%ld", error.code);
-            
-        }else{
-            // ログイン成功時の処理
-            [self performSegueWithIdentifier:@"login" sender:self];
-            NSLog(@"ログインに成功しました:%@", user.objectId);
-            
-        }
-        
-    }];
+    [self performSegueWithIdentifier:@"login" sender:self];
+//    // 入力確認
+//    if (self.userNameTextField.text.length == 0 || self.passwordTextField.text.length == 0) {
+//        self.errorLabel.text = @"未入力の項目があります";
+//        // TextFieldを空に
+//        [self cleanTextField];
+//        
+//        return;
+//        
+//    }
+//    
+//    // ユーザー名とパスワードでログイン
+//    [NCMBUser logInWithUsernameInBackground:self.userNameTextField.text password:self.passwordTextField.text block:^(NCMBUser *user, NSError *error) {
+//        // TextFieldを空に
+//        [self cleanTextField];
+//        
+//        if (error) {
+//            // ログイン失敗時の処理
+//            self.errorLabel.text = [NSString stringWithFormat:@"ログインに失敗しました:%ld", error.code];
+//            NSLog(@"ログインに失敗しました:%ld", error.code);
+//            
+//        }else{
+//            // ログイン成功時の処理
+//            [self performSegueWithIdentifier:@"login" sender:self];
+//            NSLog(@"ログインに成功しました:%@", user.objectId);
+//            
+//        }
+//        
+//    }];
     
 }
 

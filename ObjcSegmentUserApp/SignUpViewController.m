@@ -68,8 +68,8 @@
         
         if (error) {
             // 新規登録失敗時の処理
-            self.errorLabel.text = [NSString stringWithFormat: @"ログインに失敗しました:%ld", error.code];
-            NSLog(@"ログインに失敗しました:%ld", error.code);
+            self.errorLabel.text = [NSString stringWithFormat: @"ログインに失敗しました:%ld", (long)error.code];
+            NSLog(@"ログインに失敗しました:%ld", (long)error.code);
             
         } else {
             // 新規登録成功時の処理

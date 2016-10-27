@@ -1,5 +1,5 @@
 //
-//  LogoutViewController.h
+//  SegmentUserController.h
 //  ObjcSegmentUserApp
 //
 //  Created by NIFTY on 2016/10/26.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LogoutViewController : UIViewController
+@interface SegmentUserViewController : UIViewController
 
 @end
 
