@@ -16,6 +16,8 @@
 		9D01BF121DC091FF00151024 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D01BF0E1DC091FF00151024 /* SignUpViewController.m */; };
 		9D01BF131DC091FF00151024 /* SegmentUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D01BF101DC091FF00151024 /* SegmentUserViewController.m */; };
 		9D01BF181DC09DF200151024 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D01BF161DC09DF200151024 /* Main.storyboard */; };
+		9D320CB71DC1F196007EF943 /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D320CB61DC1F196007EF943 /* CustomCell.m */; };
+		9D320CBB1DC1F22C007EF943 /* ConvertString.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D320CBA1DC1F22C007EF943 /* ConvertString.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,10 @@
 		9D01BF101DC091FF00151024 /* SegmentUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentUserViewController.m; sourceTree = "<group>"; };
 		9D01BF171DC09DF200151024 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9D320CB41DC1DA65007EF943 /* AppSetting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppSetting.h; sourceTree = "<group>"; };
+		9D320CB51DC1F196007EF943 /* CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCell.h; sourceTree = "<group>"; };
+		9D320CB61DC1F196007EF943 /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCell.m; sourceTree = "<group>"; };
+		9D320CB91DC1F22C007EF943 /* ConvertString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConvertString.h; sourceTree = "<group>"; };
+		9D320CBA1DC1F22C007EF943 /* ConvertString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConvertString.m; sourceTree = "<group>"; };
 		E78537E8364F41F289E24A38 /* Pods-ObjcSegmentUserApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ObjcSegmentUserApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ObjcSegmentUserApp/Pods-ObjcSegmentUserApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,11 +86,14 @@
 				9D01BF0E1DC091FF00151024 /* SignUpViewController.m */,
 				9D01BF0F1DC091FF00151024 /* SegmentUserViewController.h */,
 				9D01BF101DC091FF00151024 /* SegmentUserViewController.m */,
+				9D320CB51DC1F196007EF943 /* CustomCell.h */,
+				9D320CB61DC1F196007EF943 /* CustomCell.m */,
 				9D01BF161DC09DF200151024 /* Main.storyboard */,
 				9D01BEF21DC08D4100151024 /* Assets.xcassets */,
 				9D01BEF41DC08D4100151024 /* LaunchScreen.storyboard */,
 				9D01BEF71DC08D4100151024 /* Info.plist */,
 				9D320CB41DC1DA65007EF943 /* AppSetting.h */,
+				9D320CB81DC1F22C007EF943 /* Utilities */,
 				9D01BEE61DC08D4100151024 /* Supporting Files */,
 			);
 			path = ObjcSegmentUserApp;
@@ -96,6 +105,15 @@
 				9D01BEE71DC08D4100151024 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9D320CB81DC1F22C007EF943 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				9D320CB91DC1F22C007EF943 /* ConvertString.h */,
+				9D320CBA1DC1F22C007EF943 /* ConvertString.m */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		C57E60CC1404808F10CE53DF /* Frameworks */ = {
@@ -240,9 +258,11 @@
 			files = (
 				9D01BF111DC091FF00151024 /* LoginViewController.m in Sources */,
 				9D01BF121DC091FF00151024 /* SignUpViewController.m in Sources */,
+				9D320CB71DC1F196007EF943 /* CustomCell.m in Sources */,
 				9D01BEEB1DC08D4100151024 /* AppDelegate.m in Sources */,
 				9D01BF131DC091FF00151024 /* SegmentUserViewController.m in Sources */,
 				9D01BEE81DC08D4100151024 /* main.m in Sources */,
+				9D320CBB1DC1F22C007EF943 /* ConvertString.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
