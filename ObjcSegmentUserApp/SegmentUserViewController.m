@@ -38,8 +38,6 @@
 @property (nonatomic) NSArray *userKeys;
 // user情報で初期で登録されているキー
 @property (nonatomic) NSArray *initialUserKeys;
-// tableViewに表示しないuserのキー
-@property (nonatomic) NSArray *removeKeys;
 // 追加セルのマネージャー
 @property (nonatomic) AddFieldManager *addFieldManager;
 // textFieldの位置情報
@@ -51,23 +49,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.statusLabel.text = @"ログインに成功しました";
+    
     // tableView delegate
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    // user情報の初期化
-    self.user = [NCMBUser currentUser];
-    self.initialUserKeys = @[@"objectId",@"userName",@"password",@"mailAddress",@"authData",@"sessionInfo",@"mailAddressConfirm",@"temporaryPassword",@"createDate",@"updateDate",@"acl"];
-//    self.removeKeys = @[@"acl",@"deviceType",@"applicationName"];
-    NSMutableArray *keyArray = [[self.user allKeys] mutableCopy];
-    for (NSString *removeKey in self.removeKeys) {
-        [keyArray removeObject:removeKey];
-    }
-    self.userKeys = keyArray;
+    // user情報で初期で登録されているキーをセット
+    self.initialUserKeys = @[@"objectId",@"userName",@"password",@"mailAddress",@"authData",@"sessionInfo",@"mailAddressConfirm",@"temporaryPassword",@"createDate",@"updateDate",@"acl",@"sessionToken"];
+    
     // 追加セルのマネージャーの初期化
     self.addFieldManager = [[AddFieldManager alloc]init];
     
-    
+    // user情報を取得
+    [self getUser];
 }
 
 #pragma -mark TableViewDataSource
@@ -127,9 +123,9 @@
             // 編集なしのセル (表示のみ)
             if ([keyStr isEqualToString:@"deviceToken"]) {
                 // deviceTokenセルはセルの高さを変更して全体を表示させる
-                cell = [tableView dequeueReusableCellWithIdentifier:TOKEN_CELL_IDENTIFIER];
+                cell = [tableView dequeueReusableCellWithIdentifier:MULTI_LINE_CELL_IDENTIFIER];
                 if (!cell){
-                    cell = [[CustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TOKEN_CELL_IDENTIFIER];
+                    cell = [[CustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MULTI_LINE_CELL_IDENTIFIER];
                 }
             } else {
                 // deviceTokenセル以外
@@ -152,7 +148,7 @@
         cell.valueField.delegate = self;
         cell.valueField.tag = indexPath.row;
         cell.valueField.text = self.addFieldManager.valueStr ? self.addFieldManager.valueStr : @"";
-        [cell.postBtn addTarget:self action:@selector(postInstallation:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.postBtn addTarget:self action:@selector(postUser:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     return cell;
@@ -167,35 +163,27 @@
     
     NCMBUser *user = [NCMBUser currentUser];
     
-    // objectIdが取得できている場合はtableViewの表示を更新する
-    if ([user objectForKey:@"objectId"]) {
-        //端末情報をデータストアから取得
-        [user fetchInBackgroundWithBlock:^(NSError *error) {
-            if(!error){
-                //端末情報の取得が成功した場合の処理
-                NSLog(@"取得に成功");
-                self.user = user;
-                NSMutableArray *keyArray = [[self.user allKeys] mutableCopy];
-                for (NSString *removeKey in self.removeKeys) {
-                    [keyArray removeObject:removeKey];
-                }
-                self.userKeys = keyArray;
-                // 追加fieldの値を初期化する
-                self.addFieldManager.keyStr = @"";
-                self.addFieldManager.valueStr = @"";
-                [self.tableView reloadData];
-            } else {
-                // ユーザー情報の取得が失敗した場合の処理
-                self.statusLabel.text = [NSString stringWithFormat:@"取得に失敗しました:%ld",(long)error.code];
-            }
-        }];
-    }
+    //端末情報をデータストアから取得
+    [user fetchInBackgroundWithBlock:^(NSError *error) {
+        if(!error){
+            //端末情報の取得が成功した場合の処理
+            NSLog(@"取得に成功");
+            self.user = user;
+            // 追加fieldの値を初期化する
+            self.addFieldManager.keyStr = @"";
+            self.addFieldManager.valueStr = @"";
+            [self.tableView reloadData];
+        } else {
+            // ユーザー情報の取得が失敗した場合の処理
+            self.statusLabel.text = [NSString stringWithFormat:@"取得に失敗しました:%ld",(long)error.code];
+        }
+    }];
 }
 
 /**
  登録ボタンをタップした時に呼ばれます
  */
-- (void)postInstallation:(id)sender {
+- (void)postUser:(id)sender {
     
     // 追加用セルをinstallationにセットする
     if (self.addFieldManager.keyStr && ![self.addFieldManager.keyStr isEqualToString:@""]) {
@@ -259,9 +247,6 @@
             if ([textField.text rangeOfString:@","].location != NSNotFound) {
                 // value文字列に[,]がある場合は配列に変換してinstallationにセットする
                 [self.user setObject:[textField.text componentsSeparatedByString:@","] forKey:self.userKeys[textField.tag]];
-            } else if ([self.userKeys[textField.tag]isEqualToString:@"channels"]) {
-                // channelsは[,]がなくても配列に変換
-                [self.user setObject:@[textField.text] forKey:self.userKeys[textField.tag]];
             } else {
                 // それ以外は文字列としてinstallationにセットする
                 [self.user setObject:textField.text forKey:self.userKeys[textField.tag]];
