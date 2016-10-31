@@ -62,6 +62,10 @@
     // 追加セルのマネージャーの初期化
     self.addFieldManager = [[AddFieldManager alloc]init];
     
+    // キーボードのイベント設定
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    
     // user情報を取得
     [self getUser];
 }
@@ -90,11 +94,9 @@
     
     if (indexPath.row == self.userKeys.count) {
         return TABLE_VIEW_POST_BTN_CELL_HEIGHT;
+    } else if ([self.userKeys[indexPath.row]isEqualToString:@"acl"]) {
+        return MULTI_LINE_CELL_HEIGHT;
     }
-//    else if ([self.instKeys[indexPath.row]isEqualToString:@"deviceToken"]) {
-//        return DEVICE_TOKEN_CELL_HEIGHT;
-//    }
-    
     return TABLE_VIEW_CELL_HEIGHT;
 }
 
@@ -121,7 +123,7 @@
             cell.valueField.tag = indexPath.row;
         } else {
             // 編集なしのセル (表示のみ)
-            if ([keyStr isEqualToString:@"deviceToken"]) {
+            if ([keyStr isEqualToString:@"acl"]) {
                 // deviceTokenセルはセルの高さを変更して全体を表示させる
                 cell = [tableView dequeueReusableCellWithIdentifier:MULTI_LINE_CELL_IDENTIFIER];
                 if (!cell){
@@ -169,6 +171,7 @@
             //端末情報の取得が成功した場合の処理
             NSLog(@"取得に成功");
             self.user = user;
+            self.userKeys = [self.user allKeys];
             // 追加fieldの値を初期化する
             self.addFieldManager.keyStr = @"";
             self.addFieldManager.valueStr = @"";
@@ -271,6 +274,53 @@
     }
 }
 
+#pragma -mark keyboardWillShow
+
+/**
+ キーボードが表示されたら呼ばれる
+ */
+- (void)keyboardWillShow:(NSNotification*)notification {
+    
+    CGRect keyboardRect = [[notification userInfo][UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    keyboardRect = [[self.view superview] convertRect:keyboardRect fromView:nil];
+    NSNumber *duration = [notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    
+    CGFloat keyboardPosition = self.view.frame.size.height - keyboardRect.size.height;
+    
+    // autoLayoutを解除
+    self.tableView.translatesAutoresizingMaskIntoConstraints = YES;
+    
+    // 編集するtextFieldの位置がキーボードより下にある場合は、位置を移動する
+    if (self.textFieldPosition + TABLE_VIEW_CELL_HEIGHT > keyboardPosition) {
+        //アニメーションでtextFieldを動かす
+        [UIView animateWithDuration:[duration doubleValue]
+                         animations:^{
+                             CGRect rect = self.tableView.frame;
+                             rect.origin.y = keyboardRect.origin.y - self.textFieldPosition;
+                             self.tableView.frame = rect;
+                         } ];
+    }
+}
+
+/**
+ キーボードが隠れると呼ばれる
+ */
+- (void)keyboardWillHide:(NSNotification *)notification {
+    
+    NSNumber *duration = [notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    
+    // autoLayoutに戻す
+    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    //アニメーションでtextFieldを動かす
+    [UIView animateWithDuration:[duration doubleValue]
+                     animations:^{
+                         CGRect rect = self.tableView.frame;
+                         rect.origin.y = self.view.frame.size.height- self.tableView.frame.size.height;
+                         self.tableView.frame = rect;
+                     }];
+}
+
 // 背景をタップするとキーボードを隠す
 - (IBAction)tapScreen:(UITapGestureRecognizer *)sender {
     [self.view endEditing: YES];
@@ -280,9 +330,7 @@
 - (IBAction)logoutBtn:(UIButton *)sender {
     [NCMBUser logOut];
     [self dismissViewControllerAnimated:YES completion:nil];
-     NSLog(@"ログアウトしました");
+    NSLog(@"ログアウトしました");
 }
-
-
 
 @end

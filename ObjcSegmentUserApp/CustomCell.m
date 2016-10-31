@@ -26,9 +26,12 @@
 - (void)setCellWithKey:(NSString *)keyStr value:(id)valueStr {
 
     self.keyLabel.text = keyStr;
-
-    if (valueStr) {
-        self.valueLabel.text = [ConvertString convertNSStringToAnyObject:valueStr];
+    
+    if (valueStr && ![valueStr isEqual:[NSNull null]] && [keyStr isEqualToString:@"mailAddressConfirm"]) {
+        // mailAddressConfirmは真偽値を文字列に変換
+        self.valueLabel.text = valueStr ? @"true" : @"false";
+    } else {
+        self.valueLabel.text = valueStr ? [ConvertString convertNSStringToAnyObject:valueStr] : @"";
     }
 }
 
@@ -40,12 +43,8 @@
 - (void)setCellWithKey:(NSString *)keyStr editValue:(id)valueStr {
 
     self.keyLabel.text = keyStr;
-
-    if (valueStr) {
-        self.valueField.text = [ConvertString convertNSStringToAnyObject:valueStr];
-
-    }
-
+    
+    self.valueField.text = valueStr ? [ConvertString convertNSStringToAnyObject:valueStr] : @"";
 }
 
 @end
