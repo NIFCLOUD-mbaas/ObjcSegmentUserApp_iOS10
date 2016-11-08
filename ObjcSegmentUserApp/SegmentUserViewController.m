@@ -14,7 +14,7 @@
 
 /**
  追加fieldのマネージャー　（表示用の一時保存）
- keyの値を変更する場合があるので、追加fieldは保存ボタン時にinstallationに登録する
+ keyの値を変更する場合があるので、追加fieldは保存ボタン時にuserに登録する
  */
 @interface AddFieldManager : NSObject
 
@@ -28,7 +28,7 @@
 
 @interface SegmentUserViewController ()<UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
-// installationの内容を表示するリスト
+// user情報を表示するリスト
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 // 通信結果を表示するラベル
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
@@ -76,7 +76,6 @@
  TableViewのheaderViewを返します。
  */
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    
     return (UIView *)[tableView dequeueReusableCellWithIdentifier:@"sectionHeader"];
 }
 
@@ -95,6 +94,7 @@
     if (indexPath.row == self.userKeys.count) {
         return TABLE_VIEW_POST_BTN_CELL_HEIGHT;
     } else if ([self.userKeys[indexPath.row]isEqualToString:@"acl"]) {
+        // aclセルのみ２行で表示する
         return MULTI_LINE_CELL_HEIGHT;
     }
     return TABLE_VIEW_CELL_HEIGHT;
@@ -110,7 +110,7 @@
     if (indexPath.row < self.userKeys.count) {
         // 最後のセル以外
         NSString *keyStr = self.userKeys[indexPath.row];
-        NSString *valueStr = [self.user objectForKey:self.userKeys[indexPath.row]];
+        id value = [self.user objectForKey:keyStr];
         
         if (![self.initialUserKeys containsObject:keyStr]) {
             // 既存フィールド以外とchannelsはvalueを編集できるようにする
@@ -118,25 +118,25 @@
             if (!cell){
                 cell = [[CustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EDIT_CELL_IDENTIFIER];
             }
-            [cell setCellWithKey:keyStr editValue:valueStr];
+            [cell setCellWithKey:keyStr editValue:value];
             cell.valueField.delegate = self;
             cell.valueField.tag = indexPath.row;
         } else {
             // 編集なしのセル (表示のみ)
             if ([keyStr isEqualToString:@"acl"]) {
-                // deviceTokenセルはセルの高さを変更して全体を表示させる
+                // 表示文字数が多いセルはセルの高さを変更して全体を表示させる
                 cell = [tableView dequeueReusableCellWithIdentifier:MULTI_LINE_CELL_IDENTIFIER];
                 if (!cell){
                     cell = [[CustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MULTI_LINE_CELL_IDENTIFIER];
                 }
             } else {
-                // deviceTokenセル以外
+                // 通常のセル
                 cell = [tableView dequeueReusableCellWithIdentifier:NOMAL_CELL_IDENTIFIER];
                 if (!cell){
                     cell = [[CustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NOMAL_CELL_IDENTIFIER];
                 }
             }
-            [cell setCellWithKey:keyStr value:valueStr];
+            [cell setCellWithKey:keyStr value:value];
         }
     } else {
         // 最後のセルは追加用セルと登録ボタンを表示
@@ -159,7 +159,7 @@
 #pragma -mark requestUser
 
 /**
- 最新のinstallationを取得します。
+ 最新のuser情報を取得します。
  */
 - (void)getUser {
     
@@ -168,7 +168,7 @@
     //端末情報をデータストアから取得
     [user fetchInBackgroundWithBlock:^(NSError *error) {
         if(!error){
-            //端末情報の取得が成功した場合の処理
+            // ユーザー情報の取得が成功した場合の処理
             NSLog(@"取得に成功");
             self.user = user;
             self.userKeys = [self.user allKeys];
@@ -184,15 +184,15 @@
 }
 
 /**
- 登録ボタンをタップした時に呼ばれます
+ 送信ボタンをタップした時に呼ばれます
  */
 - (void)postUser:(id)sender {
     
-    // 追加用セルをinstallationにセットする
+    // 追加用セルの値をuserにセットする
     if (self.addFieldManager.keyStr && ![self.addFieldManager.keyStr isEqualToString:@""]) {
         // keyに値が設定されていた場合
         if ([self.addFieldManager.valueStr rangeOfString:@","].location != NSNotFound) {
-            // value文字列に[,]がある場合は配列に変換してinstallationにセットする
+            // value文字列に[,]がある場合は配列に変換してuserにセットする
             [self.user setObject:[self.addFieldManager.valueStr componentsSeparatedByString:@","] forKey:self.addFieldManager.keyStr];
         } else {
             [self.user setObject:self.addFieldManager.valueStr forKey:self.addFieldManager.keyStr];
@@ -213,7 +213,9 @@
 
 #pragma -mark TextFieldDelegate
 
-// キーボードの「Return」押下時の処理
+/**
+ キーボードの「Return」押下時の処理
+ */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     // キーボードを閉じる
     [textField resignFirstResponder];
@@ -243,20 +245,20 @@
 -(void)textFieldDidEndEditing:(UITextField*)textField {
     // tableViewのdatasorceを編集する
     if (textField.tag < self.userKeys.count) {
-        // 最後のセル以外はinstallationを更新する
+        // 最後のセル以外はuserを更新する
         NSString *userValueStr = [ConvertString convertNSStringToAnyObject:[self.user objectForKey:self.userKeys[textField.tag]]];
         if (![userValueStr isEqualToString:textField.text]) {
-            // valueの値に変更がある場合はinstallationを更新する
+            // valueの値に変更がある場合はuserを更新する
             if ([textField.text rangeOfString:@","].location != NSNotFound) {
-                // value文字列に[,]がある場合は配列に変換してinstallationにセットする
+                // value文字列に[,]がある場合は配列に変換してuserにセットする
                 [self.user setObject:[textField.text componentsSeparatedByString:@","] forKey:self.userKeys[textField.tag]];
             } else {
-                // それ以外は文字列としてinstallationにセットする
+                // それ以外は文字列としてuserにセットする
                 [self.user setObject:textField.text forKey:self.userKeys[textField.tag]];
             }
         }
     } else {
-        // 追加セルはmanagerクラスを更新する（installation更新時に保存する）
+        // 追加セルはmanagerクラスを更新する（user更新時に保存する）
         CustomCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:textField.tag inSection:0]];
         if ([textField isEqual:cell.keyField]) {
             // keyFieldの場合

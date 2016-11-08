@@ -16,7 +16,18 @@
 @property (weak, nonatomic) IBOutlet UITextField *valueField;
 @property (weak, nonatomic) IBOutlet UIButton *postBtn;
 
-- (void)setCellWithKey:(NSString *)keyStr value:(id)valueStr;
-- (void)setCellWithKey:(NSString *)keyStr editValue:(id)valueStr;
+/**
+ 通常セル (内容を表示するだけ)
+ @param keyStr keyラベルに表示する文字列
+ @param value valueラベルに表示するオブジェクト　（文字列、配列、Dictionary）
+ */
+- (void)setCellWithKey:(NSString *)keyStr value:(id)value;
+
+/**
+ value編集セル
+ @param keyStr keyラベルに表示する文字列
+ @param value valueラベルに表示するオブジェクト　（文字列、配列、Dictionary）
+ */
+- (void)setCellWithKey:(NSString *)keyStr editValue:(id)value;
 
 @end

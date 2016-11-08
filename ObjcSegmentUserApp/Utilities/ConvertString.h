@@ -11,7 +11,7 @@
 @interface ConvertString : NSObject
 
 /**
- installationのvalueの値をNSStringクラスに変換する
+ user情報のvalueの値をNSStringクラスに変換する
  @param anyObject NSArray or NSDictionary or NSString オブジェクト
  */
 + (NSString *)convertNSStringToAnyObject:(id)anyObject;

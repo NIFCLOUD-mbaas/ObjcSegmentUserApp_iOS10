@@ -21,30 +21,30 @@
 /**
  通常セル (内容を表示するだけ)
  @param keyStr keyラベルに表示する文字列
- @param valueStr valueラベルに表示する文字列
+ @param value valueラベルに表示するオブジェクト　（文字列、配列、Dictionary）
  */
-- (void)setCellWithKey:(NSString *)keyStr value:(id)valueStr {
+- (void)setCellWithKey:(NSString *)keyStr value:(id)value {
 
     self.keyLabel.text = keyStr;
     
-    if (valueStr && ![valueStr isEqual:[NSNull null]] && [keyStr isEqualToString:@"mailAddressConfirm"]) {
+    if (value && ![value isEqual:[NSNull null]] && [keyStr isEqualToString:@"mailAddressConfirm"]) {
         // mailAddressConfirmは真偽値を文字列に変換
-        self.valueLabel.text = valueStr ? @"true" : @"false";
+        self.valueLabel.text = value ? @"true" : @"false";
     } else {
-        self.valueLabel.text = valueStr ? [ConvertString convertNSStringToAnyObject:valueStr] : @"";
+        self.valueLabel.text = value ? [ConvertString convertNSStringToAnyObject:value] : @"";
     }
 }
 
 /**
  value編集セル
  @param keyStr keyラベルに表示する文字列
- @param valueStr valueテキストフィールドに表示する文字列
+ @param value valueラベルに表示するオブジェクト　（文字列、配列、Dictionary）
  */
-- (void)setCellWithKey:(NSString *)keyStr editValue:(id)valueStr {
+- (void)setCellWithKey:(NSString *)keyStr editValue:(id)value {
 
     self.keyLabel.text = keyStr;
     
-    self.valueField.text = valueStr ? [ConvertString convertNSStringToAnyObject:valueStr] : @"";
+    self.valueField.text = value ? [ConvertString convertNSStringToAnyObject:value] : @"";
 }
 
 @end

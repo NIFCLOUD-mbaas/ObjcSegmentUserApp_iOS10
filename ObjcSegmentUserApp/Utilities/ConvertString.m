@@ -11,7 +11,7 @@
 @implementation ConvertString
 
 /**
- installationのvalueの値をNSStringクラスに変換する
+ user情報のvalueの値をNSStringクラスに変換する
  @param anyObject NSArray or NSDictionary or NSString オブジェクト
  @return 文字列
  */
