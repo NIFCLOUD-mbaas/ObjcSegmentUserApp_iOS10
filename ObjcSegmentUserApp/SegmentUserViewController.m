@@ -294,7 +294,7 @@
     
     // 編集するtextFieldの位置がキーボードより下にある場合は、位置を移動する
     if (self.textFieldPosition + TABLE_VIEW_CELL_HEIGHT > keyboardPosition) {
-        //アニメーションでtextFieldを動かす
+        // アニメーションでtextFieldを動かす
         [UIView animateWithDuration:[duration doubleValue]
                          animations:^{
                              CGRect rect = self.tableView.frame;
@@ -314,11 +314,11 @@
     // autoLayoutに戻す
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    //アニメーションでtextFieldを動かす
+    // アニメーションでtextFieldを動かす
     [UIView animateWithDuration:[duration doubleValue]
                      animations:^{
                          CGRect rect = self.tableView.frame;
-                         rect.origin.y = self.view.frame.size.height- self.tableView.frame.size.height;
+                         rect.origin.y = self.view.frame.size.height - self.tableView.frame.size.height;
                          self.tableView.frame = rect;
                      }];
 }
