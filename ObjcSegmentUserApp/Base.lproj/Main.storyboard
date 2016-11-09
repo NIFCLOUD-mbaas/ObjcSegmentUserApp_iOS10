@@ -586,6 +586,9 @@
                             <constraint firstItem="tDg-rO-SBG" firstAttribute="top" secondItem="N77-rh-bqw" secondAttribute="bottom" constant="5" id="we8-ED-ES1"/>
                             <constraint firstAttribute="trailingMargin" secondItem="rD9-Xz-ZxS" secondAttribute="trailing" constant="20" id="yf3-3B-vgJ"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="nD1-mX-kjN" appends="YES" id="qD9-Bm-Zz0"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="OgN-VX-xIB"/>
                     <connections>
@@ -596,7 +599,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cbn-gX-ilK" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="nD1-mX-kjN">
                     <connections>
-                        <action selector="tapScreen:" destination="tFr-cF-sbY" id="sYt-vS-HL5"/>
+                        <action selector="tapScreen:" destination="tFr-cF-sbY" id="Vyn-oU-Vue"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -626,6 +629,6 @@
         <image name="SignUp" width="142" height="53"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="WTd-Gz-Q2f"/>
+        <segue reference="SI2-6G-d4p"/>
     </inferredMetricsTieBreakers>
 </document>

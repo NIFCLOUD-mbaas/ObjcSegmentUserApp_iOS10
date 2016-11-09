@@ -311,9 +311,6 @@
     
     NSNumber *duration = [notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
     
-    // autoLayoutに戻す
-    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
-    
     // アニメーションでtextFieldを動かす
     [UIView animateWithDuration:[duration doubleValue]
                      animations:^{
