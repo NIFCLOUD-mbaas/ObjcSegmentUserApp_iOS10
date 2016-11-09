@@ -391,7 +391,7 @@
 				INFOPLIST_FILE = ObjcSegmentUserApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = test.ObjcSegmentUserApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobilebackend.niftycloud.ObjcSegmentUserApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -407,7 +407,7 @@
 				INFOPLIST_FILE = ObjcSegmentUserApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = test.ObjcSegmentUserApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobilebackend.niftycloud.ObjcSegmentUserApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
