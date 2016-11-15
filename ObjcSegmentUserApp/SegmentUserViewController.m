@@ -162,10 +162,10 @@
  最新のuser情報を取得します。
  */
 - (void)getUser {
-    
+    // NCMBUserのインスタンスを作成
     NCMBUser *user = [NCMBUser currentUser];
     
-    //端末情報をデータストアから取得
+    // ユーザー情報データストアから取得
     [user fetchInBackgroundWithBlock:^(NSError *error) {
         if(!error){
             // ユーザー情報の取得が成功した場合の処理

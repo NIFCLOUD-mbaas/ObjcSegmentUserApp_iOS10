@@ -104,7 +104,7 @@
 
 ### 7.新しいフィールドの追加
 * 新しいフィールドの追加をしてみましょう。"favorite"というフィールドを作り、中身には"music"と入れてみました。こうすることで、ユーザー情報に新しい属性を付与することができるようになります！
-* 編集が完了したら送信ボタンをタップして下さい
+* 編集が完了したら更新ボタンをタップして下さい
 
 ![画像15](/readme-img/015.png)
 
@@ -190,4 +190,4 @@ NCMBUser *user = [NCMBUser currentUser];
 
 ## 参考
 * 同じ内容の【Swift】版もご用意しています
- * [SwiftSegmentUserApp_iOS10](https://github.com/natsumo/SwiftSegmentUserApp_iOS10)
+ * [SwiftSegmentUserApp_iOS10](https://github.com/NIFTYCloud-mbaas/SwiftSegmentUserApp_iOS10)
