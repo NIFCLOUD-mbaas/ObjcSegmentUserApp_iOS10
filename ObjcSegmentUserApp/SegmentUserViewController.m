@@ -188,6 +188,12 @@
  */
 - (void)postUser:(id)sender {
     
+    // 追加フィールドにvalueだけセットされてkeyには何もセットされていない場合
+    if (![self.addFieldManager.valueStr isEqualToString:@""] && [self.addFieldManager.keyStr isEqualToString:@""]) {
+        self.statusLabel.text = @"key,valueをセットで入力してください";
+        return;
+    }
+    
     // 追加用セルの値をuserにセットする
     if (self.addFieldManager.keyStr && ![self.addFieldManager.keyStr isEqualToString:@""]) {
         // keyに値が設定されていた場合
@@ -202,11 +208,11 @@
     // user情報を更新
     [self.user saveInBackgroundWithBlock:^(NSError *error) {
         if(!error){
-            self.statusLabel.text = [NSString stringWithFormat:@"保存に成功しました"];
+            self.statusLabel.text = [NSString stringWithFormat:@"更新に成功しました"];
             // tableViewの内容を更新
             [self getUser];
         } else {
-            self.statusLabel.text = [NSString stringWithFormat:@"保存に失敗しました:%ld",(long)error.code];
+            self.statusLabel.text = [NSString stringWithFormat:@"更新に失敗しました:%ld",(long)error.code];
         }
     }];
 }
