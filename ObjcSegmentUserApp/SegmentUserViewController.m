@@ -213,6 +213,8 @@
             [self getUser];
         } else {
             self.statusLabel.text = [NSString stringWithFormat:@"更新に失敗しました:%ld",(long)error.code];
+            // 保存に失敗した場合は、userから削除する
+            [self.user removeObjectForKey:self.addFieldManager.keyStr];
         }
     }];
 }
