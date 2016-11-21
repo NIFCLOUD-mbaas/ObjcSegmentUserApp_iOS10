@@ -1,10 +1,10 @@
-# 【iOS10 Objective-C】ログインしたユーザー情報を表示してみよう！
+# 【iOS10 Objective-C】ユーザー情報を更新してみよう！
 *2016/10/26作成*
 
 ![画像01](/readme-img/001.png)
 
 ## 概要
-* [ニフティクラウドmobile backend](http://mb.cloud.nifty.com/)の『会員管理機能』を利用してObjective-Cアプリにログイン機能を実装し、ユーザー情報の一覧を表示するサンプルプロジェクトです
+* [ニフティクラウドmobile backend](http://mb.cloud.nifty.com/)の『会員管理機能』を利用してObjective-Cアプリにログイン機能を実装し、ユーザー情報を更新するサンプルプロジェクトです
 * 簡単な操作ですぐに [ニフティクラウドmobile backend](http://mb.cloud.nifty.com/)の機能を体験いただけます★☆
 * このサンプルはiOS10に対応しています
  * iOS8以上でご利用いただけます
