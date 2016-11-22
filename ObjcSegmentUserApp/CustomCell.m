@@ -29,7 +29,7 @@
     
     if (value && ![value isEqual:[NSNull null]] && [keyStr isEqualToString:@"mailAddressConfirm"]) {
         // mailAddressConfirmは真偽値を文字列に変換
-        self.valueLabel.text = value ? @"true" : @"false";
+        self.valueLabel.text = value && [value boolValue] ? @"true" : @"false";
     } else {
         self.valueLabel.text = value ? [ConvertString convertNSStringToAnyObject:value] : @"";
     }
