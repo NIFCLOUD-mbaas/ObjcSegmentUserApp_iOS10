@@ -4,12 +4,12 @@
 ![画像01](/readme-img/001.png)
 
 ## 概要
-* [ニフクラ mobile backend](https://mbaas.nifcloud.com/)の『会員管理機能』を利用してObjective-Cアプリにログイン機能を実装し、ユーザー情報を更新するサンプルプロジェクトです
-* 簡単な操作ですぐに [ニフクラ mobile backend](https://mbaas.nifcloud.com/)の機能を体験いただけます★☆
+* [ニフティクラウドmobile backend](https://mbaas.nifcloud.com/)の『会員管理機能』を利用してObjective-Cアプリにログイン機能を実装し、ユーザー情報を更新するサンプルプロジェクトです
+* 簡単な操作ですぐに [ニフティクラウドmobile backend](https://mbaas.nifcloud.com/)の機能を体験いただけます★☆
 * このサンプルはiOS10に対応しています
  * iOS8以上でご利用いただけます
 
-## ニフクラ mobile backendって何？？
+## ニフティクラウドmobile backendって何？？
 スマートフォンアプリのバックエンド機能（プッシュ通知・データストア・会員管理・ファイルストア・SNS連携・位置情報検索・スクリプト）が**開発不要**、しかも基本**無料**(注1)で使えるクラウドサービス！
 
 注1：詳しくは[こちら](https://mbaas.nifcloud.com/price.htm)をご覧ください
@@ -26,14 +26,14 @@
 ※上記内容で動作確認をしています
 
 ## 作業の手順
-### 1. [ニフクラ mobile backend](https://mbaas.nifcloud.com/)の会員登録とログイン
+### 1. [ニフティクラウドmobile backend](https://mbaas.nifcloud.com/)の会員登録とログイン
 
 * 上記リンクから会員登録（無料）をします。登録ができたらログインをすると下図のように「アプリの新規作成」画面が出るのでアプリを作成します
 
 ![画像03](/readme-img/003.png)
 
 * アプリ作成されると下図のような画面になります
-* この２種類のAPIキー（アプリケーションキーとクライアントキー）はXcodeで作成するiOSアプリに[ニフクラ mobile backend](https://mbaas.nifcloud.com/)を紐付けるために使用します
+* この２種類のAPIキー（アプリケーションキーとクライアントキー）はXcodeで作成するiOSアプリに[ニフティクラウドmobile backend](https://mbaas.nifcloud.com/)を紐付けるために使用します
 
 ![画像04](/readme-img/004.png)
 
@@ -61,7 +61,7 @@
 ### 4. APIキーの設定
 
 * `AppDelegate.m`を編集します
-* 先程[ニフクラ mobile backend](https://mbaas.nifcloud.com/)のダッシュボード上で確認したAPIキーを貼り付けます
+* 先程[ニフティクラウドmobile backend](https://mbaas.nifcloud.com/)のダッシュボード上で確認したAPIキーを貼り付けます
 
 ![画像07](/readme-img/007.png)
 
