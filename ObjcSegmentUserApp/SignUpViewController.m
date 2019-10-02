@@ -45,7 +45,7 @@
         
         return;
         
-    } else if (self.passwordTextField.text != self.passwordTextField_second.text) {
+    } else if (![self.passwordTextField.text isEqualToString:self.passwordTextField_second.text]) {
         self.errorLabel.text = @"passwordが一致しません";
         // TextFieldを空に
         [self cleanTextField];
