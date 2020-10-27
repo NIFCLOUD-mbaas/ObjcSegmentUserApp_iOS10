@@ -17,7 +17,6 @@
 ![画像02](/readme-img/002.png)
 
 ## 動作環境
-
 * Mac OS 10.15(Catalina)
 * Xcode ver. 12.0
 * Simulator ver.12.0
