@@ -4,34 +4,35 @@
 ![画像01](/readme-img/001.png)
 
 ## 概要
-* [ニフティクラウドmobile backend](http://mb.cloud.nifty.com/)の『会員管理機能』を利用してObjective-Cアプリにログイン機能を実装し、ユーザー情報を更新するサンプルプロジェクトです
-* 簡単な操作ですぐに [ニフティクラウドmobile backend](http://mb.cloud.nifty.com/)の機能を体験いただけます★☆
+* [ニフクラmobile backend](https://mbaas.nifcloud.com/)の『会員管理機能』を利用してObjective-Cアプリにログイン機能を実装し、ユーザー情報を更新するサンプルプロジェクトです
+* 簡単な操作ですぐに [ニフクラmobile backend](https://mbaas.nifcloud.com/)の機能を体験いただけます★☆
 * このサンプルはiOS10に対応しています
  * iOS8以上でご利用いただけます
 
-## ニフティクラウドmobile backendって何？？
+## ニフクラmobile backendって何？？
 スマートフォンアプリのバックエンド機能（プッシュ通知・データストア・会員管理・ファイルストア・SNS連携・位置情報検索・スクリプト）が**開発不要**、しかも基本**無料**(注1)で使えるクラウドサービス！
 
-注1：詳しくは[こちら](http://mb.cloud.nifty.com/price.htm)をご覧ください
+注1：詳しくは[こちら](https://mbaas.nifcloud.com/price.htm)をご覧ください
 
 ![画像02](/readme-img/002.png)
 
 ## 動作環境
- * Mac OS Mojave
- * Xcode ver. 11.0 
- * iPhone6s(iOS 13.1)
+* Mac OS 10.15(Catalina)
+* Xcode ver. 12.0
+* Simulator ver.12.0
+* iPhone11 (iOS14.0)
 
 ※上記内容で動作確認をしています
 
 ## 作業の手順
-### 1. [ニフティクラウドmobile backend](http://mb.cloud.nifty.com/)の会員登録とログイン
+### 1. [ニフクラmobile backend](https://mbaas.nifcloud.com/)の会員登録とログイン
 
 * 上記リンクから会員登録（無料）をします。登録ができたらログインをすると下図のように「アプリの新規作成」画面が出るのでアプリを作成します
 
 ![画像03](/readme-img/003.png)
 
 * アプリ作成されると下図のような画面になります
-* この２種類のAPIキー（アプリケーションキーとクライアントキー）はXcodeで作成するiOSアプリに[ニフティクラウドmobile backend](http://mb.cloud.nifty.com/)を紐付けるために使用します
+* この２種類のAPIキー（アプリケーションキーとクライアントキー）はXcodeで作成するiOSアプリに[ニフクラmobile backend](https://mbaas.nifcloud.com/)を紐付けるために使用します
 
 ![画像04](/readme-img/004.png)
 
@@ -39,11 +40,11 @@
 
 ![画像05](/readme-img/005.png)
 
-### 2. [GitHub](https://github.com/NIFTYCloud-mbaas/ObjcSegmentUserApp_iOS10)からサンプルプロジェクトのダウンロード
+### 2. [GitHub](https://github.com/NIFCloud-mbaas/ObjcSegmentUserApp_iOS10)からサンプルプロジェクトのダウンロード
 
 * 下記リンクをクリックしてプロジェクトをダウンロードをMacにダウンロードします
 
- * __[ObjcSegmentUserApp](https://github.com/NIFTYCloud-mbaas/ObjcSegmentUserApp_iOS10/archive/master.zip)__
+ * __[ObjcSegmentUserApp](https://github.com/NIFCloud-mbaas/ObjcSegmentUserApp_iOS10/archive/master.zip)__
 
 ### 3. Xcodeでアプリを起動
 
@@ -59,7 +60,7 @@
 ### 4. APIキーの設定
 
 * `AppDelegate.m`を編集します
-* 先程[ニフティクラウドmobile backend](http://mb.cloud.nifty.com/)のダッシュボード上で確認したAPIキーを貼り付けます
+* 先程[ニフクラmobile backend](https://mbaas.nifcloud.com/)のダッシュボード上で確認したAPIキーを貼り付けます
 
 ![画像07](/readme-img/007.png)
 
@@ -85,7 +86,7 @@
 ![画像14](/readme-img/014.png)
 
 * ログインに失敗した場合は画面にエラーコードが表示されます
-* エラーが発生した場合は、[こちら](http://mb.cloud.nifty.com/doc/current/rest/common/error.html)よりエラー内容を確認いただけます
+* エラーが発生した場合は、[こちら](https://mbaas.nifcloud.com/doc/current/rest/common/error.html)よりエラー内容を確認いただけます
 
 #### 新しいフィールドの追加
 * 新しいフィールドの追加をしてみましょう。"favorite"というフィールドを作り、中身には"music"と入れてみました。こうすることで、ユーザー情報に新しい属性を付与することができるようになります！
@@ -167,4 +168,4 @@ NCMBUser *user = [NCMBUser currentUser];
 
 ## 参考
 * 同じ内容の【Swift】版もご用意しています
- * [SwiftSegmentUserApp_iOS10](https://github.com/NIFTYCloud-mbaas/SwiftSegmentUserApp_iOS10)
+ * [SwiftSegmentUserApp_iOS10](https://github.com/NIFCloud-mbaas/SwiftSegmentUserApp_iOS10)

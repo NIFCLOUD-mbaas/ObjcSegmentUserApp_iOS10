@@ -3,7 +3,7 @@
 //  ObjcSegmentUserApp
 //
 //  Created by FUJITSU CLOUD TECHNOLOGIES on 2016/10/26.
-//  Copyright 2017 FUJITSU CLOUD TECHNOLOGIES LIMITED All Rights Reserved.
+//  Copyright 2020 FUJITSU CLOUD TECHNOLOGIES LIMITED All Rights Reserved.
 //
 
 #import "SignUpViewController.h"
@@ -44,7 +44,6 @@
         [self cleanTextField];
         
         return;
-        
     } else if (![self.passwordTextField.text isEqualToString:self.passwordTextField_second.text]) {
         self.errorLabel.text = @"passwordが一致しません";
         // TextFieldを空に
